@@ -41,7 +41,7 @@ class ChatClient():
     def saving_activated(self, iata):
         self._send_msg("Saving results to DB activated for airline '%s' " % (iata))
 
-def create_chat_notificator(token, user='alertlib', send_to='@tomasvarga', s_msg=None, e_msg=None, return_instance=False):
+def create_chat_notificator(token, user='alertlib', send_to='#general', s_msg=None, e_msg=None, return_instance=False):
     def wrap(func):
         @wraps(func)
         def wrapped_f(*args, **kwargs):

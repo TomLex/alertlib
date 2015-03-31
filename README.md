@@ -18,7 +18,7 @@ send_to_slack(slack_token, send_from, send_to, message)
 ```python
 from alertlib import create_chat_notificator
 
-chat_notify = create_chat_notificator(slack_token, return_instance=True)
+chat_notify = create_chat_notificator(slack_token, user='alertlib', send_to='#channel', s_msg=None, e_msg=None, return_instance=True)
 
 # if return_instance is True
 @chat_notify
