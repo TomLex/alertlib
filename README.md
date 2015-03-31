@@ -3,6 +3,14 @@ library for sending alerts for various platforms
 
 # examples
 
+## email
+```python
+from alertlib import send_to_email
+
+## mandrill_login = [mandrill_login, mandrill_password]
+send_to_email(mandrill_login, email_from='alertlib@skypicker.com', email_to=[], subject='', message='', list_of_files=[])
+```
+
 ## slack
 
 #### simple
