@@ -11,6 +11,8 @@ from email.MIMEBase import MIMEBase
 from email.MIMEText import MIMEText
 from email import Encoders
 
+import pygerduty
+
 
 ########################################  EMAIL  ########################################
 def send_to_email(mandrill_login, email_from='alertlib@skypicker.com', email_to=[], subject='', message='', list_of_files=[]):
@@ -96,3 +98,19 @@ def create_chat_notificator(token, user='alertlib', send_to='#general', s_msg=No
 def send_to_slack(token, send_from, send_to, message):
     ChatClient(token, send_from, send_to)._send_msg(message)
 
+
+
+########################################  PAGER DUTY  ########################################
+
+def create_pagerduty_notificator(api_key):
+    def wrap(func):
+        @wraps(func)
+        def wrapped_f(*args, **kwargs):
+            pager = pygerduty.PagerDuty("skypicker", api_token=api_key)
+            return func(pager, *args, **kwargs)
+        return wrapped_f
+    return wrap
+
+def send_to_pagerduty(token, service_key, description, details=None, client=None, client_url=None):
+    pager = pygerduty.PagerDuty("skypicker", api_token=token)
+    pager.trigger_incident(service_key, description, details=details, client=client, client_url=client_url)

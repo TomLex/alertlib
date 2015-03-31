@@ -41,3 +41,25 @@ method_to_wrap(*args, **kwargs):
 	pass
 ```
 
+## pager duty
+#### simple
+```python
+from alertlib import send_to_pagerduty
+
+# when sending to user then send_to must start with '@'
+# when sending to channel then send_to must start with '#'
+send_to_pagerduty(token, service_key, description, details=None, client=None, client_url=None)
+```
+
+#### or with decorator
+```python
+from alertlib import create_pagerduty_notificator
+
+pagerduty_notify = create_pager_notificator(api_key)
+
+@pagerduty_notify
+method_to_wrap(pager, *args, **kwargs):
+	# ...
+	pager.trigger_incident(service_key, alert_description, details=None, client=None, client_url=None)
+	# ...
+```
