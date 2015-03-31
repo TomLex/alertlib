@@ -48,7 +48,7 @@ from alertlib import send_to_pagerduty
 
 # when sending to user then send_to must start with '@'
 # when sending to channel then send_to must start with '#'
-send_to_pagerduty(token, service_key, description, details=None, client=None, client_url=None)
+send_to_pagerduty(api_key, service_key, description, details=None, client=None, client_url=None)
 ```
 
 #### or with decorator
