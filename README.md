@@ -1,7 +1,7 @@
 # alertlib
 library for sending alerts for various platforms
 
-# examples
+# usage
 
 ## email
 ```python
@@ -63,3 +63,7 @@ method_to_wrap(pager, *args, **kwargs):
 	pager.trigger_incident(service_key, alert_description, details=None, client=None, client_url=None)
 	# ...
 ```
+
+# installation
+
+	pip install -e git+https://github.com/TomLex/alertlib.git#egg=alertlib
