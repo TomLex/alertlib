@@ -1,2 +1,2 @@
-pyslack
+git+git://github.com/loisaidasam/pyslack.git
 pygerduty
