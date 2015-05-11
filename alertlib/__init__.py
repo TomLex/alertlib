@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 
 from functools import wraps
 
@@ -15,16 +16,14 @@ import pygerduty
 
 
 ########################################  EMAIL  ########################################
-def send_to_email(mandrill_login, email_from='alertlib@skypicker.com', email_to=[], subject='', message='', list_of_files=[]):
+def send_to_email(mandrill_login, email_from='alertlib@skypicker.com', email_to=[], cc=[], subject='', message='', list_of_files=[]):
     # email_to must be list
-    smtp = smtplib.SMTP("smtp.mandrillapp.com",587)
-    smtp.starttls()
-    smtp.login(*mandrill_login)
-
     mpart = MIMEMultipart()
     mpart.set_charset("utf-8")
     mpart["From"] = email_from
     mpart["Subject"] = subject
+    mpart['To'] = ', '.join(email_to)
+    mpart['Cc'] = ', '.join(cc)
 
     mpart.attach(MIMEText(message, 'plain'))
 
@@ -34,11 +33,11 @@ def send_to_email(mandrill_login, email_from='alertlib@skypicker.com', email_to=
         Encoders.encode_base64(fpart)
         fpart.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(f))
         mpart.attach(fpart)
-                
-    for to in email_to:
-        mpart["To"] = to
-        smtp.sendmail(mpart["From"], to, mpart.as_string())
 
+    smtp = smtplib.SMTP("smtp.mandrillapp.com",587)
+    smtp.starttls()
+    smtp.login(*mandrill_login)
+    smtp.sendmail(mpart["From"], email_to+cc, mpart.as_string())
     smtp.close()
 
 
