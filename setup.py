@@ -17,5 +17,6 @@ setup(
     license='MIT',
     keywords='alert slack pagerduty',
     packages=find_packages(),
+    dependency_links=['https://github.com/loisaidasam/pyslack.git#egg=pyslack'],
     install_requires=requirements
 )
