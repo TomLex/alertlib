@@ -1,2 +1,2 @@
 pygerduty
-pyslack
+pyslack-real
